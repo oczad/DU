@@ -14,65 +14,39 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/timeZone"})
 public class MyServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String timeZoneReq = request.getParameter("timeZoneInput");
+        String zona = request.getParameter("zona");
 
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>" +
                     "<html>" +
                     "<head>" +
-                    "<title>Servlet MyServlet</title>" +
+                    "<title>Fakt legrace</title>" +
                     "</head>" +
                     "<body>");
             try {
-                ZoneId zone = ZoneId.of(timeZoneReq);
-                ZonedDateTime now = ZonedDateTime.now(zone);
-                out.println("Time: " + now);
+                ZoneId zonaID = ZoneId.of(zona);
+                ZonedDateTime upraveno = ZonedDateTime.now(zonaID);
+                out.println("Čas: " + upraveno);
             } catch (ZoneRulesException e) {
-                out.println("Wrong time zone");
+                out.println("Spatna zona");
             } catch (DateTimeException i) {
-                out.println("Wrong format of time zone");
+                out.println("Neco se pokazilo");
             }
             out.println("<br>" +
                     "<a href=\"./\">Back<a>" +
@@ -81,14 +55,5 @@ public class MyServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

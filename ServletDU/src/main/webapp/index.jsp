@@ -6,7 +6,7 @@
 </head>
 <body>
 <form name="timeZoneForm" method="post" action="timeZone">
-    Continent/City:<input type="text" name="timeZoneInput"/> <br/>
+    Continent/City:<input type="text" name="zona"/> <br/>
     <input type="submit" value="Search"/>
 </form>
 </body>
